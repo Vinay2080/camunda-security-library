@@ -69,7 +69,7 @@ class OidcCamundaUserServiceTest {
     final var authentication =
         CamundaAuthentication.of(
             b ->
-                b.user("Alice")
+                b.user("alice")
                     .tenants(List.of("tenant-1", "tenant-2"))
                     .group("group-1")
                     .role("role-1"));
@@ -79,7 +79,7 @@ class OidcCamundaUserServiceTest {
     final var dto = service.getCurrentUser();
 
     assertThat(dto).isNotNull();
-    assertThat(dto.username()).isEqualTo("Alice");
+    assertThat(dto.username()).isEqualTo("alice");
     assertThat(dto.tenants()).containsExactly("tenant-1", "tenant-2");
     assertThat(dto.groups()).containsExactly("group-1");
     assertThat(dto.roles()).containsExactly("role-1");
@@ -96,7 +96,7 @@ class OidcCamundaUserServiceTest {
                 "id-token-value",
                 Instant.now(),
                 Instant.now().plusSeconds(300),
-                Map.of("sub", "Alice")));
+                Map.of("sub", "alice")));
     final var authToken = new OAuth2AuthenticationToken(oidcUser, List.of(), "test");
     SecurityContextHolder.setContext(new SecurityContextImpl(authToken));
 
@@ -115,7 +115,7 @@ class OidcCamundaUserServiceTest {
             Instant.now(),
             Instant.now().plusSeconds(300));
     final var authorizedClient =
-        new OAuth2AuthorizedClient(clientRegistration, "Alice", accessToken);
+        new OAuth2AuthorizedClient(clientRegistration, "alice", accessToken);
     when(authorizedClientRepository.loadAuthorizedClient(eq("test"), any(), eq(request)))
         .thenReturn(authorizedClient);
 
@@ -131,7 +131,7 @@ class OidcCamundaUserServiceTest {
                 "tok-with-\"quote\"-and-\\backslash",
                 Instant.now(),
                 Instant.now().plusSeconds(300),
-                Map.of("sub", "Alice")));
+                Map.of("sub", "alice")));
     SecurityContextHolder.setContext(
         new SecurityContextImpl(new OAuth2AuthenticationToken(oidcUser, List.of(), "test")));
 

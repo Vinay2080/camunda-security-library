@@ -35,8 +35,8 @@ class CamundaUserDTOTest {
 
     final var dto =
         new CamundaUserDTO(
-            "Alice",
-            "Alice",
+            "alice",
+            "alice",
             "alice@example.com",
             components,
             tenants,
@@ -45,8 +45,8 @@ class CamundaUserDTOTest {
             "enterprise",
             false);
 
-    assertThat(dto.displayName()).isEqualTo("Alice");
-    assertThat(dto.username()).isEqualTo("Alice");
+    assertThat(dto.displayName()).isEqualTo("alice");
+    assertThat(dto.username()).isEqualTo("alice");
     assertThat(dto.email()).isEqualTo("alice@example.com");
     assertThat(dto.authorizedComponents()).isEqualTo(components);
     assertThat(dto.tenants()).isEqualTo(tenants);
