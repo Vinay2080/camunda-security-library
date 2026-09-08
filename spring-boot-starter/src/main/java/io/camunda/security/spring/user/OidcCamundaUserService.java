@@ -16,7 +16,6 @@ import io.camunda.security.core.port.out.AuthorizedComponentsPort;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Optional;
-import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -28,17 +27,16 @@ import org.springframework.security.oauth2.core.oidc.StandardClaimAccessor;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.server.resource.authentication.AbstractOAuth2TokenAuthenticationToken;
 
-
 /**
  * Default {@link CamundaUserPort} for OIDC deployments. Builds a {@link CamundaUserDTO} from the
  * active {@link CamundaAuthentication} and the OIDC principal carried in the Spring Security
  * context, and returns the access (or id) token via {@link OAuth2AuthorizedClientRepository}.
  *
- * <p>The default <strong>does not</strong> resolve tenant display names, SaaS metadata, or {@code
- * c8Links}; those values are left empty because CSL has no contract for them. Authorized components
- * come from the host-provided {@link AuthorizedComponentsPort} (in OC, the adapter delegates to
- * {@code ResourceAccessProvider}); when no adapter is registered, the configuration falls back to
- * an empty-list bean.
+ * <p>The default <strong>does not</strong> resolve tenant display names or SaaS metadata; those
+ * values are left empty because CSL has no contract for them. Authorized components come from the
+ * host-provided {@link AuthorizedComponentsPort} (in OC, the adapter delegates to {@code
+ * ResourceAccessProvider}); when no adapter is registered, the configuration falls back to an
+ * empty-list bean.
  */
 public class OidcCamundaUserService implements CamundaUserPort {
 
@@ -165,7 +163,6 @@ public class OidcCamundaUserService implements CamundaUserPort {
   record OidcTokenUser(Map<String, Object> claims) implements StandardClaimAccessor {
 
     @Override
-    @NullMarked
     public Map<String, Object> getClaims() {
       return claims;
     }

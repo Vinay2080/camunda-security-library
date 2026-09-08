@@ -18,7 +18,7 @@ class CamundaUserDTOTest {
   void normalisesNullCollectionsToEmpty() {
     final var dto =
         new CamundaUserDTO(
-            "Alice", "Alice", "alice@example.com", null, null, null, null, "free",  true);
+            "Alice", "alice", "alice@example.com", null, null, null, null, "free", true);
 
     assertThat(dto.authorizedComponents()).isEmpty();
     assertThat(dto.tenants()).isEmpty();
@@ -35,7 +35,7 @@ class CamundaUserDTOTest {
 
     final var dto =
         new CamundaUserDTO(
-            "alice",
+            "Alice",
             "alice",
             "alice@example.com",
             components,
@@ -45,7 +45,7 @@ class CamundaUserDTOTest {
             "enterprise",
             false);
 
-    assertThat(dto.displayName()).isEqualTo("alice");
+    assertThat(dto.displayName()).isEqualTo("Alice");
     assertThat(dto.username()).isEqualTo("alice");
     assertThat(dto.email()).isEqualTo("alice@example.com");
     assertThat(dto.authorizedComponents()).isEqualTo(components);
